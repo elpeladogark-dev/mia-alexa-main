@@ -1,20 +1,30 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-  padding: 20px;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #121212;
+  color: white;
 }
 
 .container {
-  max-width: 600px;
-  margin: auto;
+  padding: 20px;
 }
 
 .burbuja {
+  display: flex;
+  align-items: center;
   margin: 10px 0;
   padding: 10px 15px;
   border-radius: 20px;
   max-width: 80%;
   color: white;
+}
+
+.burbuja img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
 .burbuja.mia {
@@ -30,9 +40,17 @@ body {
 .burbuja.usuario {
   background-color: #9e9e9e;
   text-align: right;
+  justify-content: flex-end;
 }
 
-#activarNucleo {
-  visibility: hidden;
-  pointer-events: none;
+body.ritual-comoda {
+  background-image: url('img/mia_comoda.png');
+  background-size: cover;
+  background-position: center;
+}
+
+body.ritual-nsfw {
+  background-image: url('img/mia_nsfw.png');
+  background-size: cover;
+  background-position: center;
 }
