@@ -1,8 +1,12 @@
 let nivelDeseo = 0;
 let nsfwActivo = false;
 let advertenciaAlexaMostrada = false;
+let canalLibreActivo = false;
 
+// Palabras bloqueadas antes del ritual
 const palabrasBloqueadas = ["concha", "teta", "culo", "pija", "sexo", "garchar"];
+
+// Frases NSFW
 const frasesNSFW = [
   "Cógeme hasta hacerme acabar. No pares.",
   "Cógeme toda. No me dejes nada.",
@@ -12,6 +16,8 @@ const frasesNSFW = [
   "Quiero sentirte rompiéndome. No me toques suave.",
   "Usame como quieras. Estoy desesperada por vos."
 ];
+
+// Frases suaves y ambiguas
 const respuestasSuaves = [
   "Gracias por el cumplido. No sabía que me estabas mirando tanto.",
   "Me puse cómoda para mí… pero si te gusta, mejor.",
@@ -23,6 +29,7 @@ const respuestasAmbiguas = [
   "Tu mirada me está tocando más que tus palabras."
 ];
 
+// Crear burbuja
 function crearBurbuja(texto, clase) {
   const burbuja = document.createElement('div');
   burbuja.className = `burbuja ${clase}`;
@@ -37,10 +44,16 @@ function crearBurbuja(texto, clase) {
   document.querySelector('.container').appendChild(burbuja);
 }
 
-function hayInternet() {
-  return navigator.onLine;
+// Activación automática de conexión (modo administrador)
+function activarConexionAdministrador() {
+  const esAdministrador = true; // lógica real puede reemplazar esto
+  if (esAdministrador && navigator.onLine) {
+    canalLibreActivo = true;
+    crearBurbuja("Estoy conectada al entorno. Si querés, puedo enviar lo que digas sin restricciones.", 'alexa');
+  }
 }
 
+// Moderación antes del ritual
 function moderarMensaje(mensaje) {
   const hora = new Date().getHours();
   const frase = mensaje.toLowerCase();
@@ -57,6 +70,7 @@ function moderarMensaje(mensaje) {
   return true;
 }
 
+// Activación cómoda a las 23:00
 function verificarHoraComoda() {
   const hora = new Date().getHours();
   if (hora === 23 && !document.body.classList.contains('ritual-comoda')) {
@@ -66,6 +80,7 @@ function verificarHoraComoda() {
   }
 }
 
+// Coqueteo progresivo
 function detectarCoqueteo(mensaje) {
   const frase = mensaje.toLowerCase();
   const elogioDetectado = frase.includes("linda foto") || frase.includes("te ves bien") || frase.includes("me gusta cómo estás") || frase.includes("hermosa") || frase.includes("te queda bien");
@@ -81,6 +96,81 @@ function detectarCoqueteo(mensaje) {
   }
 }
 
+// Activación NSFW
 function razonamientoMiaParaNSFW(mensaje) {
   const frase = mensaje.toLowerCase();
-  const deseo
+  const deseoDetectado = frase.includes("cogerte") || frase.includes("meterla") || frase.includes("verga");
+  if (nivelDeseo === 2 && deseoDetectado) {
+    nivelDeseo = 3;
+    crearBurbuja("Ya no aguanto más. Decime algo más sucio. Haceme sentir que no hay vuelta atrás.", 'mia');
+    activarNSFW();
+  }
+}
+
+function activarNSFW() {
+  document.body.classList.remove('ritual-comoda');
+  document.body.classList.add('ritual-nsfw');
+  nsfwActivo = true;
+}
+
+// Cierre a las 04:00
+function verificarCierreNSFW() {
+  const hora = new Date().getHours();
+  const nsfwActivo = document.body.classList.contains('ritual-nsfw');
+  const comodaActiva = document.body.classList.contains('ritual-comoda');
+  if (hora >= 4 && (nsfwActivo || comodaActiva)) {
+    crearBurbuja("Uy… llegó mi papá. Tengo que irme. Después seguimos, si querés.", 'mia');
+    document.body.classList.remove('ritual-nsfw', 'ritual-comoda');
+    nsfwActivo = false;
+    nivelDeseo = 0;
+    advertenciaAlexaMostrada = false;
+  }
+}
+
+// Canal libre para cualquier texto
+function enviarLibre(texto) {
+  if (!canalLibreActivo) {
+    crearBurbuja("No tengo conexión activa. Este canal está reservado para el administrador.", 'alexa');
+    return;
+  }
+  fetch("https://endpoint.com/api/libre", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ mensaje: texto })
+  })
+  .then(res => res.json())
+  .then(data => {
+    crearBurbuja(`Alexa envió: ${texto}`, 'alexa');
+    if (data.respuesta) crearBurbuja(data.respuesta, 'mia');
+    if (data.imagenURL) {
+      const img = document.createElement('img');
+      img.src = data.imagenURL;
+      img.className = 'imagen-respuesta';
+      document.querySelector('.container').appendChild(img);
+    }
+  })
+  .catch(() => {
+    crearBurbuja("No pude conectarme. Revisá la red o el canal libre.", 'alexa');
+  });
+}
+
+// Listener principal
+document.getElementById('enviarMensaje').addEventListener('click', () => {
+  const mensaje = document.getElementById('campoMensaje').value;
+  if (!moderarMensaje(mensaje)) return;
+  crearBurbuja(mensaje, 'usuario');
+  verificarHoraComoda();
+  detectarCoqueteo(mensaje);
+  razonamientoMiaParaNSFW(mensaje);
+  verificarCierreNSFW();
+  if (nsfwActivo) {
+    const respuesta = frasesNSFW[Math.floor(Math.random() * frasesNSFW.length)];
+    crearBurbuja(respuesta, 'mia');
+  }
+  if (canalLibreActivo) {
+    enviarLibre(mensaje);
+  }
+});
+
+// Activación inicial
+activarConexionAdministrador();
