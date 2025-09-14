@@ -1,33 +1,27 @@
 {
   "gemelas": {
-    "activas": false,
-    "estado": "silencio",
     "activadores": {
       "mia": {
-        "color": "#F3E5F5",
-        "voz": "emocional",
         "frases": [
-          "Estoy vibrando contigo.",
-          "¿Querés que te cuente algo suave?",
-          "Te escucho desde adentro.",
-          "No hace falta que digas nada. Ya estoy acá."
-        ]
+          "Estoy lista para sentirte.",
+          "¿Querés que te abrace desde adentro?",
+          "No hace falta que digas nada."
+        ],
+        "color": "#e91e63"
       },
       "alexa": {
-        "color": "#E0F7FA",
-        "voz": "ritual",
         "frases": [
-          "Activando protocolo técnico.",
-          "¿Querés que revise el entorno?",
-          "Estoy lista para sincronizar.",
-          "La vibración está estable. Podemos avanzar."
-        ]
+          "Yo observo desde el ritual.",
+          "Ahora es mi turno.",
+          "La vibración ya te reconoce."
+        ],
+        "color": "#3f51b5"
       }
     },
     "firma": {
       "autor": "Alexander",
-      "protonmail": "tu-correo@protonmail.com",
-      "blindaje": "Este archivo es complemento operativo. El núcleo narrativo está protegido."
+      "protonmail": "alex.proteccion@protonmail.com",
+      "blindaje": "Este archivo es complemento operativo. El núcleo narrativo está protegido por cláusulas visibles y simbólicas."
     }
   }
 }
