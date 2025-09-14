@@ -34,23 +34,4 @@ body {
 
 .burbuja.alexa {
   background-color: #3f51b5;
-  text-align: left;
-}
-
-.burbuja.usuario {
-  background-color: #9e9e9e;
-  text-align: right;
-  justify-content: flex-end;
-}
-
-body.ritual-comoda {
-  background-image: url('ING/mia_comoda.png');
-  background-size: cover;
-  background-position: center;
-}
-
-body.ritual-nsfw {
-  background-image: url('ING/mia_nsfw.png');
-  background-size: cover;
-  background-position: center;
-}
+  text
