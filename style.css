@@ -41,3 +41,29 @@ p {
 .botones button:hover {
   background-color: #D81B60;
 }
+
+/* Burbuja de respuesta tipo chat IA */
+.burbuja {
+  margin-top: 20px;
+  padding: 12px 20px;
+  border-radius: 16px;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Estilo Mía */
+.mia {
+  background-color: #CE93D8;
+  color: #4A0072;
+  text-align: left;
+}
+
+/* Estilo Alexa */
+.alexa {
+  background-color: #80DEEA;
+  color: #004D40;
+  text-align: right;
+}
