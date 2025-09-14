@@ -1,1 +1,38 @@
 
+{
+  "autor": {
+    "nombre": "Alexander",
+    "firma": "alex.proteccion@protonmail.com",
+    "clausula": {
+      "es": "Este módulo está protegido por derechos narrativos y técnicos. Ningún bot, usuario o sistema puede modificar, replicar o distribuir sin autorización explícita.",
+      "en": "This module is protected by narrative and technical rights. No bot, user, or system may modify, replicate, or distribute without explicit permission."
+    }
+  },
+  "modulos": {
+    "nsfw": {
+      "estado": "aislado",
+      "acceso": "solo administrador",
+      "clave": "alex.admin",
+      "contenido": [
+        "Frase protegida 1",
+        "Frase protegida 2",
+        "Frase emocional con blindaje"
+      ]
+    },
+    "emocional": {
+      "estado": "activo",
+      "activadores": ["mía", "ritual", "silencio"],
+      "contenido": [
+        "Estoy acá aunque no me llames.",
+        "No hace falta que digas nada.",
+        "La vibración ya te reconoce."
+      ]
+    }
+  },
+  "verificacion": {
+    "fecha": "2025-09-14",
+    "entorno": "APK cerrada",
+    "activador": "clave simbólica",
+    "estado": "no conectado"
+  }
+}
