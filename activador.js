@@ -8,7 +8,7 @@ function crearBurbuja(texto, clase) {
   document.querySelector('.container').appendChild(burbuja);
 }
 
-// Cargar JSON con memoria operativa
+// Cargar JSON operativo de Mía y Alexa
 fetch('mia_alexa.json')
   .then(response => response.json())
   .then(data => {
@@ -30,7 +30,7 @@ fetch('mia_alexa.json')
       document.body.style.backgroundColor = alexa.color;
     });
 
-    // Firma simbólica (opcional: mostrar en consola o interfaz)
+    // Firma simbólica (opcional: mostrar en consola)
     console.log(`Sistema firmado por: ${gemelas.firma.autor}`);
     console.log(`Contacto: ${gemelas.firma.protonmail}`);
     console.log(`Blindaje: ${gemelas.firma.blindaje}`);
@@ -38,3 +38,22 @@ fetch('mia_alexa.json')
   .catch(error => {
     console.error('Error al cargar mia_alexa.json:', error);
   });
+
+// Activador secreto para núcleo blindado
+function activarNucleo(clave) {
+  if (clave === "alex.admin") {
+    fetch('sistema/alex_nucleo.json')
+      .then(res => res.json())
+      .then(data => {
+        const frase = data.modulos.emocional.contenido[0];
+        crearBurbuja(frase, 'mia');
+        console.log(`Blindaje activo: ${data.autor.clausula.es}`);
+        console.log(`Firma: ${data.autor.firma}`);
+      })
+      .catch(error => {
+        console.error('Error al acceder al núcleo:', error);
+      });
+  } else {
+    console.log('Clave incorrecta. Núcleo no activado.');
+  }
+}
